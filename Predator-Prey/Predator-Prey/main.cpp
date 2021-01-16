@@ -28,12 +28,15 @@ int main()
             console::gotoxy(0, 0);
 
             myWorld.simulateOneStep();
-            myWorld.display();
 
-            Sleep(1000 / WORLD_SPEED);
+            std::cout << "Caleb Davis";
+            myWorld.display();
+            std::cout << "Press any key to exit simulation.." << std::endl;
 
             if (_kbhit())
                 break;
+
+            Sleep(1000 / WORLD_SPEED);
         }
 
         console::showCursor(true);

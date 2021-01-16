@@ -79,7 +79,7 @@ void World::display() const
     int numAnts = 0;
     int numBugs = 0;
 
-    std::cout << "Caleb Davis" << std::endl << std::endl;
+    std::cout << std::endl << std::endl;
 
     // DRAW TOP BORDER
     std::cout << (char)218; // top left corner
@@ -151,7 +151,6 @@ void World::display() const
     std::cout << std::endl << std::endl;
 
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); // white
-    std::cout << "Press any key to exit simulation.." << std::endl;
 }
 
 void World::simulateOneStep() {
