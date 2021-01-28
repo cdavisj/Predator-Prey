@@ -10,22 +10,22 @@ enum Move
 };
 
 // The tick speed of the world
-const int WORLD_SPEED = 3;
+const int WORLD_SPEED = 10;
 
 // The size of this world
-const int WORLDSIZE = 5;
+const int WORLDSIZE = 20;
 
 // Number of initial ants
-const int INITIAL_ANTS = 8;
+const int INITIAL_ANTS = 30;
 
 // Number of initial bugs
-const int INITIAL_BUGS = 1;
+const int INITIAL_BUGS = 4;
 
 // Time steps between breeding of ants
 const int BREED_ANTS = 3;
 
 // Time steps between breeding of bugs
-const int BREED_BUGS = 8;
+const int BREED_BUGS = 5;
 
 // Time steps until bugs die if they have not eaten
 const int STARVE_BUGS = 3;
