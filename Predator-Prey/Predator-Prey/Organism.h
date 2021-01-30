@@ -3,7 +3,7 @@
 
 enum OrganismType 
 { 
-    ANT, BUG 
+    ANT, BUG, TWINBUG
 };
 
 // forward declaration

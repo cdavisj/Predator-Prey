@@ -11,7 +11,7 @@ int main()
 {
     char choice = 'y';
 
-    //PlaySound(TEXT("background.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    // PlaySound(TEXT("background.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
     while (choice == 'y' || choice == 'Y')
     {
@@ -29,7 +29,6 @@ int main()
 
             myWorld.simulateOneStep();
 
-            std::cout << "Caleb Davis";
             myWorld.display();
             std::cout << "Press any key to exit simulation.." << std::endl;
 

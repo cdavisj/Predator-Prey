@@ -16,10 +16,10 @@ const int WORLD_SPEED = 10;
 const int WORLDSIZE = 20;
 
 // Number of initial ants
-const int INITIAL_ANTS = 30;
+const int INITIAL_ANTS = 40;
 
 // Number of initial bugs
-const int INITIAL_BUGS = 4;
+const int INITIAL_BUGS = 6;
 
 // Time steps between breeding of ants
 const int BREED_ANTS = 3;

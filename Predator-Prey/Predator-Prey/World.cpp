@@ -79,8 +79,6 @@ void World::display() const
     int numAnts = 0;
     int numBugs = 0;
 
-    std::cout << std::endl << std::endl;
-
     // DRAW TOP BORDER
     std::cout << (char)218; // top left corner
 
@@ -136,7 +134,6 @@ void World::display() const
     std::cout << (char)217; // bottom right corner 
     std::cout << std::endl;
 
-    std::cout << std::endl;
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); // white
     std::cout << "Ants: ";
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10); // light green
