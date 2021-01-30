@@ -11,7 +11,7 @@ int main()
 {
     char choice = 'y';
 
-    PlaySound(TEXT("background.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    //PlaySound(TEXT("background.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
     while (choice == 'y' || choice == 'Y')
     {
