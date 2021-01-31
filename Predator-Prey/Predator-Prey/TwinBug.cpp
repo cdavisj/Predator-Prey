@@ -13,8 +13,11 @@ void TwinBug::move()
         if (world->getAt(x, y + 1)->getType() == TWINBUG)
         {
             delete world->getAt(x, y + 1);
-            delete world->getAt(x, y);
+            world->setAt(x, y + 1, NULL);
 
+            delete world->getAt(x, y);
+            world->setAt(x, y, NULL);
+            world->getAt(x, y)->setMoved(true);
 
             return;
         }
@@ -25,8 +28,7 @@ void TwinBug::move()
         if (world->getAt(x, y - 1)->getType() == TWINBUG)
         {
             delete world->getAt(x, y - 1);
-            delete world->getAt(x, y);
-
+            world->setAt(x, y - 1, NULL);
 
             return;
         }
@@ -37,8 +39,7 @@ void TwinBug::move()
         if (world->getAt(x - 1, y)->getType() == TWINBUG)
         {
             delete world->getAt(x - 1, y);
-            delete world->getAt(x, y);
-
+            world->setAt(x - 1, y, NULL);
 
             return;
         }
@@ -49,8 +50,7 @@ void TwinBug::move()
         if (world->getAt(x + 1, y)->getType() == TWINBUG)
         {
             delete world->getAt(x + 1, y);
-            delete world->getAt(x, y);
-
+            world->setAt(x + 1, y, NULL);
 
             return;
         }

@@ -36,6 +36,8 @@ private:
     void generateOffspring(int whereX, int whereY);
 
     int deathTicks;
+
+    bool canMove;
 };
 
 #endif /* defined(__INHERITANCE_AND_POLYMORPHISM__Bug__) */

@@ -65,4 +65,9 @@ namespace console
 
         SetConsoleCursorPosition(handle, origin);
     }
+
+    void setTextColor(Color color)
+    {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+    }
 }

@@ -11,6 +11,7 @@ class Ant : public Organism
 public:
     
     Ant(World* aWorld, int xcoord, int ycoord);
+
     // In the given world moves this organism.
     void move();
     
@@ -31,6 +32,8 @@ public:
 private:
     
     void generateOffspring(int whereX, int whereY);
+
+    bool canMove;
 };
 
 #endif /* defined(__INHERITANCE_AND_POLYMORPHISM__Ant__) */

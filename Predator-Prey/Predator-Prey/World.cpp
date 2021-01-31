@@ -95,7 +95,7 @@ void World::display() const
 
     for (int j = 0; j < WORLDSIZE; j++) 
     {
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); // white
+        console::setTextColor(white);
 
         std::cout << (char)179 << " "; // left wall
 
@@ -103,24 +103,24 @@ void World::display() const
         {
             if (grid[i][j] == NULL) 
             {
-                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); // white
+                console::setTextColor(white);
                 std::cout << "  ";
             } 
             else 
             {
                 if (grid[i][j]->getType() == ANT) 
                 {
-                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10); // light green
+                    console::setTextColor(yellow);
                     numAnts++;
                 }
                 else if (grid[i][j]->getType() == BUG) 
                 {
-                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12); // light red
+                    console::setTextColor(green);
                     numBugs++;
                 }
                 else if (grid[i][j]->getType() == TWINBUG)
                 {
-                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13); // light purple
+                    console::setTextColor(red);
                     numTwinBugs++;
                 }
 
@@ -128,14 +128,14 @@ void World::display() const
             }
         }
         
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); // white
+        console::setTextColor(white);
         std::cout << (char)179 << " "; // right wall
 
         std::cout << std::endl;
     }
 
     // DRAW TOP BORDER
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); // white
+    console::setTextColor(white);
 
     std::cout << (char)192; // bottom left corner
 
@@ -145,26 +145,26 @@ void World::display() const
     std::cout << (char)217; // bottom right corner 
     std::cout << std::endl;
 
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); // white
+    console::setTextColor(white);
     std::cout << "Ants: ";
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10); // light green
+    console::setTextColor(yellow);
     std::cout << std::setw(3) << std::left << numAnts;
 
     std::cout << std::endl;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); // white
+    console::setTextColor(white);
     std::cout << "Bugs: ";
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12); // light red
+    console::setTextColor(green);
     std::cout << std::setw(3) << std::left << numBugs;
 
     std::cout << std::endl;
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); // white
+    console::setTextColor(white);
     std::cout << "Twin Bugs: ";
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13); // light purple
+    console::setTextColor(red);
     std::cout << std::setw(3) << std::left << numTwinBugs;
 
     std::cout << std::endl << std::endl;
 
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); // white
+    console::setTextColor(white);
 }
 
 void World::simulateOneStep() {
@@ -198,10 +198,10 @@ void World::simulateOneStep() {
 // returns a random number in the range 0 to MAX-1
 Position World::randomPosition() const 
 {
-    Position p;
-    p.x = rand() % WORLDSIZE;
-    p.y = rand() % WORLDSIZE;
-    return p;
+    Position pos;
+    pos.x = rand() % WORLDSIZE;
+    pos.y = rand() % WORLDSIZE;
+    return pos;
 }
 
 

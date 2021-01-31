@@ -7,46 +7,60 @@
 
 Ant::Ant(World* aWorld, int xcoord, int ycoord) : Organism(aWorld, xcoord, ycoord)
 {
+    canMove = false;
 }
 
 void Ant::move()
 {
-    breedTicks++;
-    Move mover = world->randomMove();
-
-    switch (mover) 
+    if (canMove)
     {
-    case UP:
-        if (world->getAt(x, y + 1) == NULL && in_range(x, y + 1))
-        {
-            movesTo(x, y + 1);
-        }
-        break;
+        breedTicks++;
 
-    case DOWN:
-        if (world->getAt(x, y - 1) == NULL && in_range(x, y - 1))
-        {
-            movesTo(x, y - 1);
-        }
-        break;
+        Move mover = world->randomMove();
 
-    case LEFT:
-        if (world->getAt(x - 1, y) == NULL && in_range(x - 1, y))
+        switch (mover)
         {
-            movesTo(x - 1, y);
-        }
-        break;
+        case UP:
+            if (world->getAt(x, y + 1) == NULL && in_range(x, y + 1))
+            {
+                movesTo(x, y + 1);
+            }
+            break;
 
-    case RIGHT:
-        if (world->getAt(x + 1, y) == NULL && in_range(x + 1, y))
-        {
-            movesTo(x + 1, y);
-        }
-        break;
+        case DOWN:
+            if (world->getAt(x, y - 1) == NULL && in_range(x, y - 1))
+            {
+                movesTo(x, y - 1);
+            }
+            break;
 
-    default:
-        break;
+        case LEFT:
+            if (world->getAt(x - 1, y) == NULL && in_range(x - 1, y))
+            {
+                movesTo(x - 1, y);
+            }
+            break;
+
+        case RIGHT:
+            if (world->getAt(x + 1, y) == NULL && in_range(x + 1, y))
+            {
+                movesTo(x + 1, y);
+            }
+            break;
+
+        default:
+            break;
+        }
+
+        // set canMove to false to skip next move
+        canMove = false;
     }
+    else
+    {
+        // set canMove to true to allow them to move next turn
+        canMove = true;
+    }
+    
 }
 
 void Ant::breed()

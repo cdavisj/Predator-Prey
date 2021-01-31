@@ -9,12 +9,12 @@
 
 int main()
 {
-    char choice = 'y';
+    bool running = true;
 
-    // PlaySound(TEXT("background.wav"), NULL, SND_FILENAME | SND_ASYNC);
-
-    while (choice == 'y' || choice == 'Y')
+    while (running)
     {
+        // PlaySound(TEXT("background.wav"), NULL, SND_FILENAME | SND_ASYNC);
+
         int seed = time(0);
 
         World myWorld(seed);
@@ -30,25 +30,52 @@ int main()
             myWorld.simulateOneStep();
 
             myWorld.display();
-            std::cout << "Press any key to exit simulation.." << std::endl;
+            std::cout << "Press 'a' to add an ant." << std::endl;
+            std::cout << "Press 'b' to add a bug." << std::endl;
+            std::cout << "Press 't' to add a twin bug." << std::endl;
+            std::cout << "Press 'r' to restart simulation." << std::endl;
+            std::cout << "Press 'q' to exit the simulation." << std::endl;
 
             if (_kbhit())
-                break;
+            {
+                char keyPressed = _getch();
+
+                if (keyPressed == 'a')
+                {
+                    // add an ant to the world
+                    myWorld.createOrganisms(ANT, 1);
+                }
+                else if (keyPressed == 'b')
+                {
+                    // add a bug to the world
+                    myWorld.createOrganisms(BUG, 1);
+                }
+                else if (keyPressed == 't')
+                {
+                    // add a twin bug to the world
+                    myWorld.createOrganisms(TWINBUG, 1);
+                }
+                else if (keyPressed == 'r')
+                {
+                    // restart simulation
+                    console::clearScreen();
+                    break;
+                }
+                else if (keyPressed == 'q')
+                {
+                    // exit simulation
+                    running = false;
+                    break;
+                }
+            }
 
             Sleep(1000 / WORLD_SPEED);
         }
-
-        console::showCursor(true);
-        std::cout << std::endl;
-        std::cout << "Rerun simulation? (enter 'y' or 'n'): ";
-        std::cin >> choice;
-
-        console::clearScreen();
     }
 
+    console::clearScreen();
     std::cout << "Thank you for playing!" << std::endl;
 
-    std::cin.ignore();
     std::cin.get();
     return 0;
 }

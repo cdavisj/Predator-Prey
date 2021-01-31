@@ -10,19 +10,19 @@ enum Move
 };
 
 // The tick speed of the world
-const int WORLD_SPEED = 8;
+const int WORLD_SPEED = 10;
 
 // The size of this world
-const int WORLDSIZE = 20;
+const int WORLDSIZE = 15;
 
 // Number of initial ants
-const int INITIAL_ANTS = 0;
+const int INITIAL_ANTS = 30;
 
 // Number of initial bugs
-const int INITIAL_BUGS = 0;
+const int INITIAL_BUGS = 10;
 
 // Number of initial bugs
-const int INITIAL_TWIN_BUGS = 20;
+const int INITIAL_TWIN_BUGS = 4;
 
 // Time steps between breeding of ants
 const int BREED_ANTS = 5;
@@ -67,6 +67,10 @@ class World
         // Returns a random move (UP, DOWN, LEFT or RIGHT).
         Move randomMove() const;
 
+        // Randomly create `count` many organisms of type `orgType`.  This
+        // method uses the parameterized constructor in Ant and Bug.
+        void createOrganisms(OrganismType orgType, int count);
+
     private:
         // The grid in which the organisms live. According the to image below,
         // the correct iteration order through grid starts at the top left
@@ -84,9 +88,7 @@ class World
 		// (See e.g. the destructor for correct iteration through the grid)
         Organism* grid[WORLDSIZE][WORLDSIZE];
 
-        // Randomly create `count` many organisms of type `orgType`.  This
-        // method uses the parameterized constructor in Ant and Bug.
-        void createOrganisms(OrganismType orgType, int count);
+        // 
 
         // Reset all organisms to not moved. This is necessary because later we
         // iterate through the grid starting from the top left moving to the

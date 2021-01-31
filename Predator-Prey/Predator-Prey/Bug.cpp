@@ -4,91 +4,104 @@
 Bug::Bug(World* aWorld, int xcoord, int ycoord) : Organism(aWorld, xcoord, ycoord)
 {
     deathTicks = 0;
+
+    canMove = false;
 }
 
 void Bug::move()
 {
-    breedTicks++;
-    deathTicks++;
-    
-    if (world->getAt(x, y + 1) != NULL)
+    if (canMove)
     {
-        if (world->getAt(x, y + 1)->getType() == ANT)
+        breedTicks++;
+        deathTicks++;
+
+        if (world->getAt(x, y + 1) != NULL)
         {
-            deathTicks = 0;
-            delete world->getAt(x, y + 1);
-            movesTo(x, y + 1);
-            return;
+            if (world->getAt(x, y + 1)->getType() == ANT)
+            {
+                deathTicks = 0;
+                delete world->getAt(x, y + 1);
+                movesTo(x, y + 1);
+                return;
+            }
         }
+
+        if (world->getAt(x, y - 1) != NULL)
+        {
+            if (world->getAt(x, y - 1)->getType() == ANT)
+            {
+                deathTicks = 0;
+                delete world->getAt(x, y - 1);
+                movesTo(x, y - 1);
+                return;
+            }
+        }
+
+        if (world->getAt(x - 1, y) != NULL)
+        {
+            if (world->getAt(x - 1, y)->getType() == ANT)
+            {
+                deathTicks = 0;
+                delete world->getAt(x - 1, y);
+                movesTo(x - 1, y);
+                return;
+            }
+        }
+
+        if (world->getAt(x + 1, y) != NULL)
+        {
+            if (world->getAt(x + 1, y)->getType() == ANT)
+            {
+                deathTicks = 0;
+                delete world->getAt(x + 1, y);
+                movesTo(x + 1, y);
+                return;
+            }
+        }
+
+        Move mover = world->randomMove();
+
+        switch (mover)
+        {
+        case UP:
+            if (world->getAt(x, y + 1) == NULL && in_range(x, y + 1))
+            {
+                movesTo(x, y + 1);
+            }
+            break;
+
+        case DOWN:
+            if (world->getAt(x, y - 1) == NULL && in_range(x, y - 1))
+            {
+                movesTo(x, y - 1);
+            }
+            break;
+
+        case LEFT:
+            if (world->getAt(x - 1, y) == NULL && in_range(x - 1, y))
+            {
+                movesTo(x - 1, y);
+            }
+            break;
+
+        case RIGHT:
+            if (world->getAt(x + 1, y) == NULL && in_range(x + 1, y))
+            {
+                movesTo(x + 1, y);
+            }
+            break;
+
+        default:
+            break;
+        }
+
+        // set canMove to false to skip next move
+        canMove = false;
     }
-    
-    if (world->getAt(x, y - 1) != NULL)
+    else
     {
-        if (world->getAt(x, y - 1)->getType() == ANT)
-        {
-            deathTicks = 0;
-            delete world->getAt(x, y - 1);
-            movesTo(x, y - 1);
-            return;
-        }
-    }
-    
-    if (world->getAt(x - 1, y) != NULL)
-    {
-        if (world->getAt(x - 1, y)->getType() == ANT)
-        {
-            deathTicks = 0;
-            delete world->getAt(x - 1, y);
-            movesTo(x - 1, y);
-            return;
-        }
-    }
-
-    if (world->getAt(x + 1, y) != NULL)
-    {
-        if (world->getAt(x + 1, y)->getType() == ANT)
-        {
-            deathTicks = 0;
-            delete world->getAt(x + 1, y);
-            movesTo(x + 1, y);
-            return;
-        }
-    }
-    
-    Move mover = world->randomMove();
-
-    switch (mover)
-    {
-    case UP:
-        if (world->getAt(x, y + 1) == NULL && in_range(x, y + 1))
-        {
-            movesTo(x, y + 1);
-        }
-        break;
-
-    case DOWN:
-        if (world->getAt(x, y - 1) == NULL && in_range(x, y - 1))
-        {
-            movesTo(x, y - 1);
-        }
-        break;
-
-    case LEFT:
-        if (world->getAt(x - 1, y) == NULL && in_range(x - 1, y))
-        {
-            movesTo(x - 1, y);
-        }
-        break;
-
-    case RIGHT:
-        if (world->getAt(x + 1, y) == NULL && in_range(x + 1, y))
-        {
-            movesTo(x + 1, y);
-        }
-        break;
-
-    default:
-        break;
+        // set canMove to true to allow them to move next turn
+        canMove = true;
     }
 }
 
