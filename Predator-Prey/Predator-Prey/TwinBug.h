@@ -1,5 +1,5 @@
-#ifndef INHERITANCE_AND_POLYMORPHISM_Bug
-#define INHERITANCE_AND_POLYMORPHISM_Bug
+#ifndef INHERITANCE_AND_POLYMORPHISM_TwinBug
+#define INHERITANCE_AND_POLYMORPHISM_TwinBug
 
 #include <iostream>
 
@@ -35,7 +35,7 @@ public:
 private:
     void generateOffspring(int whereX, int whereY);
 
-    int deathTicks;
+    bool dead;
 };
 
-#endif /* defined(__INHERITANCE_AND_POLYMORPHISM__Bug__) */
+#endif /* defined(__INHERITANCE_AND_POLYMORPHISM__TwinBug__) */

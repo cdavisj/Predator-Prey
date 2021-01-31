@@ -6,6 +6,7 @@
 #include "World.h"
 #include "Ant.h"
 #include "Bug.h"
+#include "TwinBug.h"
 #include "Console.h"
 
 ///////////////////
@@ -28,11 +29,14 @@ World::World(unsigned int seed)
         }
     }
 
-    // creates the ants = 3
+    // creates the ants
     createOrganisms(ANT, INITIAL_ANTS);
 
-    // creates the bugs = 8
+    // creates the bugs
     createOrganisms(BUG, INITIAL_BUGS);
+
+    // creates the twin bugs
+    createOrganisms(TWINBUG, INITIAL_TWIN_BUGS);
 }
 
 // Deallocate memory allocated to organisms in this world.
@@ -78,6 +82,7 @@ void World::display() const
 {
     int numAnts = 0;
     int numBugs = 0;
+    int numTwinBugs = 0;
 
     // DRAW TOP BORDER
     std::cout << (char)218; // top left corner
@@ -113,6 +118,12 @@ void World::display() const
                     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12); // light red
                     numBugs++;
                 }
+                else if (grid[i][j]->getType() == TWINBUG)
+                {
+                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13); // light purple
+                    numTwinBugs++;
+                }
+
                 std::cout << grid[i][j]->representation() << " ";
             }
         }
@@ -145,6 +156,12 @@ void World::display() const
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12); // light red
     std::cout << std::setw(3) << std::left << numBugs;
 
+    std::cout << std::endl;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); // white
+    std::cout << "Twin Bugs: ";
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13); // light purple
+    std::cout << std::setw(3) << std::left << numTwinBugs;
+
     std::cout << std::endl << std::endl;
 
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15); // white
@@ -152,14 +169,18 @@ void World::display() const
 
 void World::simulateOneStep() {
     // The main routine that simulates one turn in the world:
-    // 1. move bugs
-    // 2. move ants
-    // 3. make bugs starve (which happends under a certain condition)
-    // 4. make the organisms breed (again which happens under a certain
+    // 1. move twin bugs
+    // 2. move bugs
+    // 3. move ants
+    // 4. make bugs starve (which happends under a certain condition)
+    // 5. make the organisms breed (again which happens under a certain
     // condition).
 
     // Reset all organisms to not moved
     resetOrganisms();
+
+    // Move the twin bugs
+    moveOrganism(TWINBUG);
 
     // Move the bugs
     moveOrganism(BUG);
@@ -212,6 +233,10 @@ void World::createOrganisms(OrganismType orgType, int count)
             else if (orgType == BUG) 
             {
                 new Bug(this, p.x, p.y);   // Create a Bug and put it into the world
+            }
+            else if (orgType == TWINBUG)
+            {
+                new TwinBug(this, p.x, p.y);   // Create a TwinBug and put it into the world
             }
         }
     }

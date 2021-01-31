@@ -3,54 +3,55 @@
 
 TwinBug::TwinBug(World* aWorld, int xcoord, int ycoord) : Organism(aWorld, xcoord, ycoord)
 {
-    deathTicks = 0;
+    
 }
 
 void TwinBug::move()
 {
-    breedTicks++;
-    deathTicks++;
-
     if (world->getAt(x, y + 1) != NULL)
     {
-        if (world->getAt(x, y + 1)->getType() == ANT)
+        if (world->getAt(x, y + 1)->getType() == TWINBUG)
         {
-            deathTicks = 0;
             delete world->getAt(x, y + 1);
-            movesTo(x, y + 1);
+            delete world->getAt(x, y);
+
+
             return;
         }
     }
 
     if (world->getAt(x, y - 1) != NULL)
     {
-        if (world->getAt(x, y - 1)->getType() == ANT)
+        if (world->getAt(x, y - 1)->getType() == TWINBUG)
         {
-            deathTicks = 0;
             delete world->getAt(x, y - 1);
-            movesTo(x, y - 1);
+            delete world->getAt(x, y);
+
+
             return;
         }
     }
 
     if (world->getAt(x - 1, y) != NULL)
     {
-        if (world->getAt(x - 1, y)->getType() == ANT)
+        if (world->getAt(x - 1, y)->getType() == TWINBUG)
         {
-            deathTicks = 0;
             delete world->getAt(x - 1, y);
-            movesTo(x - 1, y);
+            delete world->getAt(x, y);
+
+
             return;
         }
     }
 
     if (world->getAt(x + 1, y) != NULL)
     {
-        if (world->getAt(x + 1, y)->getType() == ANT)
+        if (world->getAt(x + 1, y)->getType() == TWINBUG)
         {
-            deathTicks = 0;
             delete world->getAt(x + 1, y);
-            movesTo(x + 1, y);
+            delete world->getAt(x, y);
+
+
             return;
         }
     }
@@ -94,23 +95,17 @@ void TwinBug::move()
 
 void TwinBug::generateOffspring(int whereX, int whereY)
 {
-    new TwinBug(this->world, whereX, whereY);
-
-    breedTicks = 0;
+    // TwinBug does not generate offspring
 }
 
 void TwinBug::breed()
 {
-    if (breedTicks >= BREED_BUGS)
-    {
-        breedAtAdjacentCell();
-    }
-
+    // TwinBug does not breed
 }
 
 bool TwinBug::isDead() const
 {
-    if (deathTicks >= STARVE_BUGS)
+    if (dead)
     {
         return true;
     }
@@ -127,12 +122,12 @@ OrganismType TwinBug::getType() const
 
 char TwinBug::representation() const
 {
-    return (char)233;
+    return (char)232;
 }
 
 int TwinBug::size() const
 {
-    return 30;
+    return 40;
 }
 
 bool TwinBug::in_range(int x, int y)
