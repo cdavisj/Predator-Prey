@@ -3,21 +3,45 @@
 
 TwinBug::TwinBug(World* aWorld, int xcoord, int ycoord) : Organism(aWorld, xcoord, ycoord)
 {
-    
+    dead = false;
 }
 
 void TwinBug::move()
 {
     if (world->getAt(x, y + 1) != NULL)
     {
-        if (world->getAt(x, y + 1)->getType() == TWINBUG)
+        if (world->getAt(x, y + 1)->getType() == ANT || world->getAt(x, y + 1)->getType() == BUG)
         {
+            delete world->getAt(x, y + 1);
+            movesTo(x, y + 1);
+            return;
+        }
+        else if (world->getAt(x, y + 1)->getType() == TWINBUG)
+        {
+            // delete twin bug that we have come into contact with
             delete world->getAt(x, y + 1);
             world->setAt(x, y + 1, NULL);
 
-            delete world->getAt(x, y);
-            world->setAt(x, y, NULL);
-            world->getAt(x, y)->setMoved(true);
+            // kill current twin bug
+            dead = true;
+
+            if (world->getAt(x, y - 1) != NULL)
+            {
+                delete world->getAt(x, y - 1);
+                world->setAt(x, y - 1, NULL);
+            }
+
+            if (world->getAt(x - 1, y) != NULL)
+            {
+                delete world->getAt(x - 1, y);
+                world->setAt(x - 1, y, NULL);
+            }
+
+            if (world->getAt(x + 1, y) != NULL)
+            {
+                delete world->getAt(x + 1, y);
+                world->setAt(x + 1, y, NULL);
+            }
 
             return;
         }
@@ -25,10 +49,38 @@ void TwinBug::move()
 
     if (world->getAt(x, y - 1) != NULL)
     {
-        if (world->getAt(x, y - 1)->getType() == TWINBUG)
+        if (world->getAt(x, y - 1)->getType() == ANT || world->getAt(x, y - 1)->getType() == BUG)
         {
             delete world->getAt(x, y - 1);
+            movesTo(x, y - 1);
+            return;
+        }
+        else if (world->getAt(x, y - 1)->getType() == TWINBUG)
+        {
+            // delete twin bug that we have come into contact with
+            delete world->getAt(x, y - 1);
             world->setAt(x, y - 1, NULL);
+
+            // kill current twin bug
+            dead = true;
+
+            if (world->getAt(x, y + 1) != NULL)
+            {
+                delete world->getAt(x, y + 1);
+                world->setAt(x, y + 1, NULL);
+            }
+
+            if (world->getAt(x - 1, y) != NULL)
+            {
+                delete world->getAt(x - 1, y);
+                world->setAt(x - 1, y, NULL);
+            }
+
+            if (world->getAt(x + 1, y) != NULL)
+            {
+                delete world->getAt(x + 1, y);
+                world->setAt(x + 1, y, NULL);
+            }
 
             return;
         }
@@ -36,10 +88,38 @@ void TwinBug::move()
 
     if (world->getAt(x - 1, y) != NULL)
     {
-        if (world->getAt(x - 1, y)->getType() == TWINBUG)
+        if (world->getAt(x - 1, y)->getType() == ANT || world->getAt(x - 1, y)->getType() == BUG)
         {
             delete world->getAt(x - 1, y);
+            movesTo(x - 1, y);
+            return;
+        }
+        else if (world->getAt(x - 1, y)->getType() == TWINBUG)
+        {
+            // delete twin bug that we have come into contact with
+            delete world->getAt(x - 1, y);
             world->setAt(x - 1, y, NULL);
+
+            // kill current twin bug
+            dead = true;
+
+            if (world->getAt(x, y + 1) != NULL)
+            {
+                delete world->getAt(x, y + 1);
+                world->setAt(x, y + 1, NULL);
+            }
+
+            if (world->getAt(x, y - 1) != NULL)
+            {
+                delete world->getAt(x, y - 1);
+                world->setAt(x, y - 1, NULL);
+            }
+
+            if (world->getAt(x + 1, y) != NULL)
+            {
+                delete world->getAt(x + 1, y);
+                world->setAt(x + 1, y, NULL);
+            }
 
             return;
         }
@@ -47,10 +127,38 @@ void TwinBug::move()
 
     if (world->getAt(x + 1, y) != NULL)
     {
-        if (world->getAt(x + 1, y)->getType() == TWINBUG)
+        if (world->getAt(x + 1, y)->getType() == ANT || world->getAt(x + 1, y)->getType() == BUG)
         {
             delete world->getAt(x + 1, y);
+            movesTo(x + 1, y);
+            return;
+        }
+        else if (world->getAt(x + 1, y)->getType() == TWINBUG)
+        {
+            // delete twin bug that we have come into contact with
+            delete world->getAt(x + 1, y);
             world->setAt(x + 1, y, NULL);
+
+            // kill current twin bug
+            dead = true;
+
+            if (world->getAt(x, y + 1) != NULL)
+            {
+                delete world->getAt(x, y + 1);
+                world->setAt(x, y + 1, NULL);
+            }
+
+            if (world->getAt(x, y - 1) != NULL)
+            {
+                delete world->getAt(x, y - 1);
+                world->setAt(x, y - 1, NULL);
+            }
+
+            if (world->getAt(x - 1, y) != NULL)
+            {
+                delete world->getAt(x - 1, y);
+                world->setAt(x - 1, y, NULL);
+            }
 
             return;
         }

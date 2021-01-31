@@ -230,7 +230,7 @@ void World::createOrganisms(OrganismType orgType, int count)
             {
                 new Ant(this, p.x, p.y);   // Create an Ant and put it into the world
             }
-            else if (orgType == BUG) 
+            else if (orgType == BUG)
             {
                 new Bug(this, p.x, p.y);   // Create a Bug and put it into the world
             }
