@@ -13,7 +13,7 @@ int main()
 
     while (running)
     {
-        // PlaySound(TEXT("background.wav"), NULL, SND_FILENAME | SND_ASYNC);
+        PlaySound(TEXT("background.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
         int seed = time(0);
 

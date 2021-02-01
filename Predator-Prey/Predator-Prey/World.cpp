@@ -84,6 +84,9 @@ void World::display() const
     int numBugs = 0;
     int numTwinBugs = 0;
 
+    console::gotoxy(0, 0);
+    console::setTextColor(white);
+
     // DRAW TOP BORDER
     std::cout << (char)218; // top left corner
 

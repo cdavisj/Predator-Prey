@@ -13,7 +13,7 @@ enum Move
 const int WORLD_SPEED = 10;
 
 // The size of this world
-const int WORLDSIZE = 15;
+const int WORLDSIZE = 20;
 
 // Number of initial ants
 const int INITIAL_ANTS = 30;

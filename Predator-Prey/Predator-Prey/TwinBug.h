@@ -32,6 +32,10 @@ public:
 
     bool in_range(int x, int y);
 
+    // Method for doing an explosion in the direction 
+    // of the other twin bug it came into contact with
+    void explode(int, int);
+
 private:
     void generateOffspring(int whereX, int whereY);
 
